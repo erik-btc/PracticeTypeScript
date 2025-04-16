@@ -1,4 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
+import {writeFileSync} from "fs";
+
 
 interface CommonUser{
     id: string,
@@ -33,6 +35,10 @@ export class UserManager{
         console.log(this.users)
     }
 
+    public returnAllUsers(): User[] {
+        return this.users;
+    }
+
     public getAdmins(): AdminUser[] {
         return this.getUsersByRole('admin');
     }
@@ -59,6 +65,13 @@ export class UserManager{
     public validateEmail(email: string): boolean{
         const emailRegex: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
+    }
+
+    public safeUsersInJson(users: User[]): void{
+        let JSONdata = JSON.stringify(users);
+        writeFileSync("file.json", JSONdata, {
+            flag: "w"
+        });
     }
 
 }

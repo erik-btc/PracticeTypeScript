@@ -2,8 +2,6 @@ import {UserManager} from "./UserManager";
 
 const userManager = new UserManager();
 
-
-
 let id: string = userManager.createUserId();
 let email: string = 'erik.peters@btc-ag.com';
 let validateEmail: boolean = userManager.validateEmail(email);
@@ -73,3 +71,4 @@ else{
 userManager.listUsers()
 console.log(userManager.getAdmins())
 console.log(userManager.getCustomers())
+userManager.safeUsersInJson(userManager.returnAllUsers())
